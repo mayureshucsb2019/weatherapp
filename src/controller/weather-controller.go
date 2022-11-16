@@ -20,13 +20,13 @@ func GetCityWeather(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, "City name not entered with the optional parameter")
 		return
 	}
-	output, err := utils.ConvertCityToCoordinates(city)
+	coord, err := utils.ConvertCityToCoordinates(city)
 	if err != nil {
 		fmt.Fprintln(w, err)
 		return
 	}
 
-	report, err := utils.GetWeatherReportForCoordinates(output)
+	report, err := utils.GetWeatherReportForCoordinates(coord)
 	if err != nil {
 		fmt.Fprintln(w, err)
 		return
