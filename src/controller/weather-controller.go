@@ -21,7 +21,7 @@ func GetCityWeather(w http.ResponseWriter, r *http.Request) {
 	}
 	coord, err := utils.ConvertCityToCoordinates(city)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
 
