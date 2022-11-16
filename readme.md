@@ -1,9 +1,9 @@
 This is a weather app to display the weather at a particular location.
 
-Software Requirements:
+## Software Requirements:
 * Go version 1.18.4
 
-HOW TO RUN THE APP
+## How to run the app
 * Export APIID into your command line terminal using `export APPID=5b17073729841d77935a48ff6472f9fb`
 * cd to the path where main.go is located
 * Check if you have go.mod and go.sum files present
@@ -13,7 +13,7 @@ HOW TO RUN THE APP
 * Binary will be generated with name weather_app 
 * Run this binary using `./weather_app` 
 
-SOLUTION EXPLANATION:
+## Solution Explanation:
 * The controller function makes use of two utility function `ConvertCityToCoordinates` and `GetWeatherReportForCoordinates`
 * `ConvertCityToCoordinates` takes in a string input of city name and queries for its geo coordinates
 *  We make use of simple caching mechanism with ttl of 24 hours for hot coordinates. This will help reduce the number of API calls to openwearthermap's geo api. 
