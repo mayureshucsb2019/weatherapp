@@ -1,0 +1,32 @@
+
+REST API
+Weather Checker
+
+Please create a REST API that displays the weather info at the visitor’s requested location - By City.
+
+The expected GET will be
+http://localhost:3000/weather?city=London
+
+You can use OpenWeatherMap.org as source of data and will require to create a Free API Key
+
+The main weather API require Longitude and Latitude based location while our API will expect City Name from the end user
+Eg.: https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
+Source: https://openweathermap.org/current
+
+The following API can be used to convert City Name into Longitude and Latitude
+Eg.: http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid={API key}
+
+Source: https://openweathermap.org/api/geocoding-api
+
+
+
+Requirements:
+1. The API request to get the weather from openweathermap.org should be made from the API server.
+2. No unit or functional tests will be expected.
+3. You may use any 3rd party libraries that you wish.
+4. Please include a README with brief documentation on your solution, including chosen technology and any important tradeoffs you made.
+5. You could use any language of your choosing, bonus points for Go :)
+
+This project is expected to take a couple hours at most, so if it looks longer than that, please send me questions and I’ll be happy to clarify!
+
+Please feel free to turn this back to me by Friday morning, the sooner the better however.
