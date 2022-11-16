@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 
@@ -17,19 +16,19 @@ func GetCityWeather(w http.ResponseWriter, r *http.Request) {
 	}
 	city := r.URL.Query().Get("city")
 	if city == "" {
-		fmt.Fprintln(w, "City name not entered with the optional parameter")
+		http.Error(w, "Enter city as optional parameter.", http.StatusUnprocessableEntity)
 		return
 	}
 	coord, err := utils.ConvertCityToCoordinates(city)
 	if err != nil {
-		fmt.Fprintln(w, err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
 	report, err := utils.GetWeatherReportForCoordinates(coord)
 	if err != nil {
-		fmt.Fprintln(w, err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	fmt.Fprintln(w, string(report))
+	w.Write(report)
 }
