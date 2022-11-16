@@ -7,6 +7,7 @@ import (
 	"weatherapp/src/utils"
 )
 
+// GetCityWeather is controller function to get weather information for an input city.
 func GetCityWeather(w http.ResponseWriter, r *http.Request) {
 	// setting a cache for hot queries for a day
 	utils.CacheCoordinates.SetTTL(time.Duration(3600 * 24 * time.Second))

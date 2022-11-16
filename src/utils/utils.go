@@ -14,9 +14,11 @@ import (
 	"github.com/mitchellh/mapstructure"
 )
 
-// Implements simple cache to store city co-ordinates
+// Implements simple cache to store city co-ordinates.
 var CacheCoordinates ttlcache.SimpleCache = ttlcache.NewCache()
 
+// GetCache function checks if a city name has been cached and outputs its models.Coordinate value.
+// Else it outputs null value and error (if any)
 func GetCache(city string) (models.Coordinate, error) {
 	var coord models.Coordinate
 	val, err := CacheCoordinates.Get(city)
@@ -30,6 +32,8 @@ func GetCache(city string) (models.Coordinate, error) {
 	return coord, nil
 }
 
+// ConvertCityToCoordinates takes as input name of city. It first queries in the local cache.
+// Otherwise it queries openweathermap geo api for coordinates, and outputs models.Coordinate and error (if any).
 func ConvertCityToCoordinates(city string) (models.Coordinate, error) {
 	log.Printf("ConvertCityToCoordinates: city received: %s\n", city)
 	// Create request URL by adding city to it and do get request
@@ -72,6 +76,8 @@ func ConvertCityToCoordinates(city string) (models.Coordinate, error) {
 	return coord, nil
 }
 
+// GetWeatherReportForCoordinates takes as input geo cordinates using models.Coordinate.
+// It queries openweathermap api for weather info and outputs byte array and error (if any).
 func GetWeatherReportForCoordinates(cord models.Coordinate) ([]byte, error) {
 	log.Printf("Coordinate received is: %+v\n", cord)
 	// Create request URL by adding city to it and do get request
@@ -93,6 +99,7 @@ func GetWeatherReportForCoordinates(cord models.Coordinate) ([]byte, error) {
 	return body, nil
 }
 
+// ErrorHandler send out 404 response for page not found issue.
 func ErrorHandler(w http.ResponseWriter, r *http.Request, status int) {
 	w.WriteHeader(status)
 	if status == http.StatusNotFound {
